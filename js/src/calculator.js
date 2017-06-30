@@ -2,7 +2,7 @@
 
   Backbone.CalculatorView = Backbone.View.extend({
     template: _.template(`
-      <form></form>
+      <form class="backform"></form>
       <table class="table table-condensed"></table>
     `),
     resultTemplate: _.template(`

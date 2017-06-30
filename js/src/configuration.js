@@ -10,14 +10,18 @@
         </div>
         <div id="config" class="panel-collapse collapse" role="tabpanel" aria-labelledby="config-heading">
           <div class="panel-body">
-            <form></form>
+            <form class="backform"></form>
           </div>
         </div>
       </div>
     `),
     titleTemplate: _.template(`
-      Config: <%=discount*100%>% + <%=amilia*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-down"></i>
+      Config: <%=discount*100%>% + <%=amilia*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-<%=opened ? 'up' : 'down'%>"></i>
     `),
+    events: {
+      'shown.bs.collapse #config': 'renderTitle',
+      'hidden.bs.collapse #config': 'renderTitle'
+    },
     initialize: function(options) {
       this.listenTo(this.model, 'change', this.renderTitle);
     },
@@ -58,6 +62,7 @@
     },
     renderTitle: function() {
       var data = this.model.toJSON();
+      data.opened = this.$('#config').hasClass('in');
       this.$title.html(this.titleTemplate(data));
       return this;
     }

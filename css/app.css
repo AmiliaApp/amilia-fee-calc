@@ -7,7 +7,15 @@ body {
   user-select: none;
 }
 
+a:active, a:focus {
+	text-decoration: none;
+}
+
 table th,
 table td {
   width: 50%;
+}
+
+.backform label {
+	font-weight: normal;
 }
