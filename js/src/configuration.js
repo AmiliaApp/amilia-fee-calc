@@ -16,7 +16,7 @@
       </div>
     `),
     titleTemplate: _.template(`
-      Config : <%=discount*100%>% + <%=amilia*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-down"></i>
+      Config: <%=discount*100%>% + <%=amilia*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-down"></i>
     `),
     initialize: function(options) {
       this.listenTo(this.model, 'change', this.renderTitle);

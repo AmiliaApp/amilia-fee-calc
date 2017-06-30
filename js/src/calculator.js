@@ -3,7 +3,7 @@
   Backbone.CalculatorView = Backbone.View.extend({
     template: _.template(`
       <form>
-        <div class="form-group">
+        <div class="form-group form-group-lg">
           <label for="calculator-amount">Amount charged to customer $</label>
           <input name="amount" type="number" class="form-control" id="calculator-amount" value="<%=amount%>" />
         </div>
@@ -29,8 +29,8 @@
           <th class="text-left"><%=result.taxes%> $</th>
         </tr>
         <tr>
-          <td class="text-right"><h4>Amount</h4></td>
-          <th class="text-left"><h4><strong><%=result.amount%> $</strong></h4></th>
+          <td class="text-right"><h3>Amount</h3></td>
+          <th class="text-left"><h3><strong><%=result.amount%> $</strong></h3></th>
         </tr>
       </tbody>
     `),
