@@ -13,19 +13,19 @@
     tableTemplate: _.template(`
       <tbody>
         <tr>
-          <td class="text-right">PaySafe</td>
+          <td class="text-right">Credit card fee</td>
           <th class="text-left"><%=result.discount%> $</th>
         </tr>
         <tr>
-          <td class="text-right">Amilia</td>
+          <td class="text-right">Service fee</td>
           <th class="text-left"><%=result.amilia%> $</th>
         </tr>
         <tr>
-          <td class="text-right">Transaction</td>
+          <td class="text-right">Transaction fee</td>
           <th class="text-left"><%=result.transaction%> $</th>
         </tr>
         <tr>
-          <td class="text-right">Taxes</td>
+          <td class="text-right">Taxes (on fees)</td>
           <th class="text-left"><%=result.taxes%> $</th>
         </tr>
         <tr>

@@ -34,12 +34,12 @@
       	model: this.model,
       	fields: [{
           name: 'discount',
-          label: 'PaySafe discount fee %',
+          label: 'Credit card (discount) fee %',
           control: 'input',
           type: 'number'
       	}, {
           name: 'amilia',
-          label: 'Amilia service fee %',
+          label: 'Service fee %',
           control: 'input',
           type: 'number'
         }, {
