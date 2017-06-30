@@ -28,9 +28,8 @@
       this.$title = this.$('.title');
       this.renderTitle();
 
-      this.$form = this.$('form');
       new Backform.Form({
-      	el: this.$form,
+      	el: this.$('form'),
       	model: this.model,
       	fields: [{
           name: 'discount',

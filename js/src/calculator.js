@@ -2,15 +2,10 @@
 
   Backbone.CalculatorView = Backbone.View.extend({
     template: _.template(`
-      <form>
-        <div class="form-group form-group-lg">
-          <label for="calculator-amount">Amount charged to customer $</label>
-          <input name="amount" type="number" class="form-control" id="calculator-amount" value="<%=amount%>" />
-        </div>
-      </form>
-      <table class="table"></table>
+      <form></form>
+      <table class="table table-condensed"></table>
     `),
-    tableTemplate: _.template(`
+    resultTemplate: _.template(`
       <tbody>
         <tr>
           <td class="text-right">Credit card fee</td>
@@ -35,25 +30,32 @@
       </tbody>
     `),
     events: {
-      'submit form': 'onSubmitForm'
-    },
-    initialize: function(options) {
-      this.listenTo(this.model, 'change', this.renderTable);
-    },
-    onSubmitForm: function(e) {
-      e.preventDefault();
-      this.model.set({amount: parseFloat(this.$amount.val(), 10)});
-      return false;
+      'submit form': 'renderResult'
     },
     render: function() {
       this.$el.html(this.template(this.model.pick('amount')));
-      this.$amount = this.$('form input[name=amount]');
-      this.$table = this.$('table');
-      return this.renderTable();
+
+      new Backform.Form({
+        el: this.$('form'),
+        model: this.model,
+        className: '',
+        fields: [{
+          name: 'amount',
+          label: 'Amount charged to customer $',
+          control: 'input',
+          type: 'number'
+        }]
+      }).render();
+      this.$('form .form-group').addClass('form-group-lg');
+
+      this.$result = this.$('table');
+      this.renderResult();
+
+      return this;
     },
-    renderTable: function() {
+    renderResult: function() {
       var data = this.model.toRender();
-      this.$table.html(this.tableTemplate(data));
+      this.$result.html(this.resultTemplate(data));
       return this;
     }
   });

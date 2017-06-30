@@ -4,7 +4,7 @@ $(document).ready(function() {
   try {
     defaults = JSON.parse(localStorage.amiliaFeeCalculatorSettings);
   } catch(error) {
-    
+
   }
 
   var model = new Backbone.CalculatorModel(defaults);
@@ -13,10 +13,16 @@ $(document).ready(function() {
     localStorage.amiliaFeeCalculatorSettings = JSON.stringify(model.toJSON());
   });
 
+  _.extend(Backform, {
+    controlLabelClassName: 'control-label',
+    controlsClassName: ''
+  });
+
   new Backbone.CalculatorView({
     el: $('#calculator'),
     model: model
   }).render();
+
   new Backbone.ConfigurationView({
     el: $('#configuration'),
     model: model
