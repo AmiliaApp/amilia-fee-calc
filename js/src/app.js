@@ -18,6 +18,8 @@ $(document).ready(function() {
     controlsClassName: ''
   });
 
+  if (window.navigator.standalone) $('body').addClass('standalone');
+
   new Backbone.CalculatorView({
     el: $('#calculator'),
     model: model
