@@ -12,16 +12,9 @@
     validate: function(data) {
       data || (data = this.toJSON());
       var errors = {};
-      if (!_.isNumber(data.discount))
-        errors.discount = 'Invalid Credit Card (discount) fee: ' + data.discount + '. Must be a number.';
-      if (!_.isNumber(data.service))
-        errors.service = 'Invalid Service fee: ' + data.service + '. Must be a number.';
-      if (!_.isNumber(data.transaction))
-        errors.transaction = 'Invalid Transaction fee: ' + data.transaction + '. Must be a number.';
-      if (!_.isNumber(data.taxes))
-        errors.taxes = 'Invalid Taxes fee: ' + data.taxes + '. Must be a number.';
-      if (!_.isNumber(data.amount))
-        errors.amount = 'Invalid Amount: ' + data.amount + '. Must be a number.';
+      _.each(['discount', 'service', 'transaction', 'taxes', 'amount'], function(attr) {
+        if (!_.isNumber(data[attr])) errors[attr] = 'Invalid value "' + data[attr] + '". Must be a number.';
+      });
       return errors;
     },
     // Returns an object of calculated results

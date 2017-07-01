@@ -36,3 +36,7 @@ table td {
 .backform label {
 	font-weight: normal;
 }
+
+a[data-toggle=collapse] {
+	display: block;
+}
