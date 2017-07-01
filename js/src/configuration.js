@@ -16,7 +16,7 @@
       </div>
     `),
     titleTemplate: _.template(`
-      Config: <%=discount*100%>% + <%=service*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-<%=opened ? 'up' : 'down'%>"></i>
+      Config: <%=discount%>% + <%=service%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-<%=opened ? 'up' : 'down'%>"></i>
     `),
     events: {
       'submit form': function(e) {e.preventDefault();},
@@ -38,22 +38,22 @@
       	model: this.model,
       	fields: [{
           name: 'discount',
-          label: 'Credit card (discount) fee %',
+          label: 'Credit card (discount) fee (%)',
           control: 'input',
           type: 'number'
       	}, {
           name: 'service',
-          label: 'Service fee %',
+          label: 'Service fee (%)',
           control: 'input',
           type: 'number'
         }, {
           name: 'transaction',
-          label: 'Transaction fee $',
+          label: 'Transaction fee ($)',
           control: 'input',
           type: 'number'
         }, {
           name: 'taxes',
-          label: 'Taxes on fees %',
+          label: 'Taxes on fees (%)',
           control: 'input',
           type: 'number'
         }]

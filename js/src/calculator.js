@@ -24,7 +24,7 @@
           <th class="text-left"><%=result.taxes%> $</th>
         </tr>
         <tr>
-          <td class="text-right"><h3>Amount</h3></td>
+          <td class="text-right"><h3>Amount<br/><small>after fees</small></h3></td>
           <th class="text-left"><h3><strong><%=result.amount%> $</strong></h3></th>
         </tr>
       </tbody>
@@ -44,7 +44,7 @@
         className: '',
         fields: [{
           name: 'amount',
-          label: 'Amount charged to customer $',
+          label: 'Amount charged to customer ($)',
           control: 'input',
           type: 'number'
         }]

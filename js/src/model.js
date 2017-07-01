@@ -2,10 +2,10 @@
 
   Backbone.CalculatorModel = Backbone.Model.extend({
     defaults: {
-      discount: 0.0275,
-      service: 0.0125,
+      discount: 2.75,
+      service: 1.25,
       transaction: 0.30,
-      taxes: 0.15,
+      taxes: 15,
       amount: 215
     },
     // Returns a hash of errors (if any)
@@ -31,12 +31,12 @@
       var errors = data.errors || (this.validate(data));
       if (errors.length) return result;
 
-      var fees = data.amount * data.discount + data.amount * data.service + data.transaction;
-      result.amount = Math.round(100 * (data.amount - fees - fees * data.taxes))/100;
-      result.discount = Math.round(100 * data.discount * data.amount)/100;
-      result.service = Math.round(100 * data.service * data.amount)/100;
+      var fees = data.amount * data.discount/100 + data.amount * data.service/100 + data.transaction;
+      result.amount = Math.round(100 * (data.amount - fees - fees * data.taxes/100))/100;
+      result.discount = Math.round(100 * data.discount/100 * data.amount)/100;
+      result.service = Math.round(100 * data.service/100 * data.amount)/100;
       result.transaction = data.transaction;
-      result.taxes = Math.round(100 * fees * data.taxes)/100;
+      result.taxes = Math.round(100 * fees * data.taxes/100)/100;
 
       return result;
     },
