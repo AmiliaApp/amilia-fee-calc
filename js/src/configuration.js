@@ -62,7 +62,7 @@
     },
     renderTitle: function() {
       var data = this.model.toJSON();
-      data.opened = this.$('#config').hasClass('in');
+      data.opened = this.$('.panel-collapse').hasClass('in');
       this.$title.html(this.titleTemplate(data));
       return this;
     }
