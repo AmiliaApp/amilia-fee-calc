@@ -3,7 +3,7 @@ $(document).ready(function() {
   // UI setup
   _.extend(Backform, {
     controlLabelClassName: 'control-label',
-    controlsClassName: ''
+    controlsClassName: 'control-group'
   });
   if (window.navigator.standalone) $('body').addClass('standalone');
 
@@ -15,19 +15,22 @@ $(document).ready(function() {
   } catch(error) {
 
   }
-  var model = new Backbone.CalculatorModel(defaults);
+  window.model = new Backbone.CalculatorModel(defaults);
+  model.errorModel = new Backbone.Model();
   model.on('change', function() {
+    model.errorModel.clear();
+    model.errorModel.set(model.validate());
     localStorage.amiliaFeeCalculatorSettings = JSON.stringify(model.toJSON());
   });
 
 
   // The two views
-  new Backbone.CalculatorView({
+  window.calculatorView = new Backbone.CalculatorView({
     el: $('#calculator'),
     model: model
   }).render();
 
-  new Backbone.ConfigurationView({
+  window.configurationView = new Backbone.ConfigurationView({
     el: $('#configuration'),
     model: model
   }).render();

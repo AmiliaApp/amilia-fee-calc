@@ -13,7 +13,7 @@
         </tr>
         <tr>
           <td class="text-right">Service fee</td>
-          <th class="text-left"><%=result.amilia%> $</th>
+          <th class="text-left"><%=result.service%> $</th>
         </tr>
         <tr>
           <td class="text-right">Transaction fee</td>
@@ -30,7 +30,10 @@
       </tbody>
     `),
     events: {
-      'submit form': 'renderResult'
+      'submit form': function(e) {e.preventDefault();}
+    },
+    initialize: function(options) {
+      this.listenTo(this.model, 'change', this.renderResult);
     },
     render: function() {
       this.$el.html(this.template(this.model.pick('amount')));
@@ -53,8 +56,7 @@
 
       return this;
     },
-    renderResult: function(e) {
-      if (e) e.preventDefault();
+    renderResult: function() {
       var data = this.model.toRender();
       this.$result.html(this.resultTemplate(data));
       return this;

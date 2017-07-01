@@ -3,43 +3,54 @@
   Backbone.CalculatorModel = Backbone.Model.extend({
     defaults: {
       discount: 0.0275,
-      amilia: 0.0125,
+      service: 0.0125,
       transaction: 0.30,
       taxes: 0.15,
       amount: 215
     },
-    // Returns toJSON() with extra validation and calculation attributes :
-    // - result: an object of calculated results
-    // - errors: array of errors (if any) as objects with 'name' and 'error'
-    toRender: function() {
-      var data = this.toJSON();
-      data.errors = [];
-      data.result = {
+    // Returns a hash of errors (if any)
+    validate: function(data) {
+      data || (data = this.toJSON());
+      var errors = {};
+      if (!_.isNumber(data.discount))
+        errors.discount = 'Invalid Credit Card (discount) fee: ' + data.discount + '. Must be a number.';
+      if (!_.isNumber(data.service))
+        errors.service = 'Invalid Service fee: ' + data.service + '. Must be a number.';
+      if (!_.isNumber(data.transaction))
+        errors.transaction = 'Invalid Transaction fee: ' + data.transaction + '. Must be a number.';
+      if (!_.isNumber(data.taxes))
+        errors.taxes = 'Invalid Taxes fee: ' + data.taxes + '. Must be a number.';
+      if (!_.isNumber(data.amount))
+        errors.amount = 'Invalid Amount: ' + data.amount + '. Must be a number.';
+      return errors;
+    },
+    // Returns an object of calculated results
+    calculate: function(data) {
+      data || (data = this.toJSON());
+      var result = {
         discount: undefined,
-        amilia: undefined,
+        service: undefined,
         transaction: undefined,
         taxes: undefined,
         amount: undefined
       };
-      if (!_.isNumber(data.discount))
-        data.errors.push({name: 'discount', error: 'Invalid PaySafe discount fee: ' + data.discount + '. Must be a number.'});
-      if (!_.isNumber(data.amilia))
-        data.errors.push({name: 'amilia', error: 'Invalid Amilia service fee: ' + data.amilia + '. Must be a number.'});
-      if (!_.isNumber(data.transaction))
-        data.errors.push({name: 'transaction', error: 'Invalid Transaction fee: ' + data.transaction + '. Must be a number.'});
-      if (!_.isNumber(data.taxes))
-        data.errors.push({name: 'taxes', error: 'Invalid Taxes fee: ' + data.taxes + '. Must be a number.'});
-      if (!_.isNumber(data.amount))
-        data.errors.push({name: 'amount', error: 'Invalid Amount: ' + data.amount + '. Must be a number.'});
+      
+      var errors = data.errors || (this.validate(data));
+      if (errors.length) return result;
 
-      if (data.errors.length == 0) {
-        var fees = data.amount * data.discount + data.amount * data.amilia + data.transaction;
-        data.result.amount = Math.round(100 * (data.amount - fees - fees * data.taxes))/100;
-        data.result.discount = Math.round(100 * data.discount * data.amount)/100;
-        data.result.amilia = Math.round(100 * data.amilia * data.amount)/100;
-        data.result.transaction = data.transaction;
-        data.result.taxes = Math.round(100 * fees * data.taxes)/100;
-      }
+      var fees = data.amount * data.discount + data.amount * data.service + data.transaction;
+      result.amount = Math.round(100 * (data.amount - fees - fees * data.taxes))/100;
+      result.discount = Math.round(100 * data.discount * data.amount)/100;
+      result.service = Math.round(100 * data.service * data.amount)/100;
+      result.transaction = data.transaction;
+      result.taxes = Math.round(100 * fees * data.taxes)/100;
+
+      return result;
+    },
+    toRender: function() {
+      var data = this.toJSON();
+      data.errors = this.validate(data);
+      data.result = this.calculate(data);
       return data;
     }
   });

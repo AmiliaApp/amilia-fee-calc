@@ -16,11 +16,12 @@
       </div>
     `),
     titleTemplate: _.template(`
-      Config: <%=discount*100%>% + <%=amilia*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-<%=opened ? 'up' : 'down'%>"></i>
+      Config: <%=discount*100%>% + <%=service*100%>% + <%=transaction%>$ <i class="fa fa-fw fa-chevron-<%=opened ? 'up' : 'down'%>"></i>
     `),
     events: {
-      'shown.bs.collapse #config': 'renderTitle',
-      'hidden.bs.collapse #config': 'renderTitle'
+      'submit form': function(e) {e.preventDefault();},
+      'shown.bs.collapse .panel-collapse': 'renderTitle',
+      'hidden.bs.collapse .panel-collapse': 'renderTitle'
     },
     initialize: function(options) {
       this.listenTo(this.model, 'change', this.renderTitle);
@@ -41,7 +42,7 @@
           control: 'input',
           type: 'number'
       	}, {
-          name: 'amilia',
+          name: 'service',
           label: 'Service fee %',
           control: 'input',
           type: 'number'
