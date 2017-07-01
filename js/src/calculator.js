@@ -53,7 +53,8 @@
 
       return this;
     },
-    renderResult: function() {
+    renderResult: function(e) {
+      if (e) e.preventDefault();
       var data = this.model.toRender();
       this.$result.html(this.resultTemplate(data));
       return this;
