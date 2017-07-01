@@ -8,7 +8,7 @@
       taxes: 0.15,
       amount: 215
     },
-    // Returns toJSON() with validation and calculation results :
+    // Returns toJSON() with extra validation and calculation attributes :
     // - result: an object of calculated results
     // - errors: array of errors (if any) as objects with 'name' and 'error'
     toRender: function() {
