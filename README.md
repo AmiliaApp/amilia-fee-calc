@@ -51,6 +51,7 @@ Unlike [React](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org
 
 ### No transpilation, no fuss
 Javascript is interpreted. Fuck transpilation, uglification and source maps. Keep things simple.
+
 *Fortunately the ES6 feature I use (template literals) is supported by all major browsers
 
 ## Contributing
