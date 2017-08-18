@@ -11,7 +11,7 @@ The App is built using Backbone and serves as a good example of a minimalist Web
 My goal is to use and enhance it as training material for new devs learning Backbone.
 
 ## Good Principles
-I tried to follow some different good principles for the end user UX, and for the code architecture.
+I tried to follow good principles for the end user UX, and for the code architecture.
 
 ### Mobile friendly
 Use of proper META tags to tell mobile browsers to behave in `index.html`:
@@ -50,4 +50,5 @@ Views contain multiple templates allowing me to separate render-once content fro
 Unlike [React](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org/) who use virtual DOMs to black-box DOM manipulations, with Backbone you must consider not to replace an INPUT element when it is being edited. Breaking your view into static vs dynamic portions allows you to cleanly overcome this problem.
 
 ### No transpilation, no fuss
-Javascript is interpreted and forutnately the ES6 feature I use (template literals) is supported by major browsers. Fuck transpilation. Keep things simple.
+Javascript is interpreted. Fuck transpilation, uglification and source maps. Keep things simple.
+*Fortunately the ES6 feature I use (template literals) is supported by all major browsers
