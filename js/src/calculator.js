@@ -12,16 +12,16 @@
           <th class="text-left"><%=result.discount%> $</th>
         </tr>
         <tr>
-          <td class="text-right">Service fee</td>
-          <th class="text-left"><%=result.service%> $</th>
-        </tr>
-        <tr>
           <td class="text-right">Transaction fee</td>
           <th class="text-left"><%=result.transaction%> $</th>
         </tr>
         <tr>
           <td class="text-right">Taxes (on fees)</td>
           <th class="text-left"><%=result.taxes%> $</th>
+        </tr>
+        <tr>
+          <td class="text-right" title="Servive fee is charged by Amilia at the end of the month. Other fees are charged by PaySafe on daily basis (after bactch out).">Service fee*</td>
+          <th class="text-left"><%=result.service%> $</th>
         </tr>
         <tr>
           <td class="text-right"><h3>Amount<br/><small>after fees</small></h3></td>
